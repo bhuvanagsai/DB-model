@@ -1,0 +1,84 @@
+Create table if not exists Students_details(
+   RegisterNo          	 int,
+   Name            		   varchar(20)        not null,
+   Father_Name  	       varchar(20)        not null,
+   Date_of_birth    	   varchar(50)        not null,
+   Age       		         int          	    not null,
+   Gender     		       varchar(6)   	    not null,
+   Nationality   		     varchar(20)   	    not null,
+   Phone_no    		       varchar(10)        not null,
+   Email_id    		       varchar(50)    	  not null,
+   Constraint     Students_details_RegisterNo_pk    primary key(RegisterNo)
+ );
+
+
+Insert     into   Student_details    values(
+   1234567,”priya”,”selvam”,”12.12.2000”,”female”,”Indian”,”9876543223”,”priya1212@gmail.com”
+);
+Insert     into   Student_details    values(
+   1234598,”prithvi”,”raj”,”11.11.2000”,”male”,”Indian”,”9875647854”,”prithviraj@gmail.com”
+);
+
+
+
+Create table if not exists  Mark_details(
+   RegisterNo         int ,
+   Name               varchar(20)    not null,
+   Groups             varchar(50)    not null,
+   Chemistry          int            not null,
+   Physics            int            not null,
+   Maths              int            not null,
+   Total              int            not null,
+   Constraint        Mark_details_RegisterNo_fk    foreign key(RegisterNo)  references Students_details(RegisterNo)
+);
+
+Insert     into   Mark_details    values(
+   1234567,”priya”,”Bio-maths”,190,185,198,1089
+);
+
+Create table if not exists Address_details  (
+   Door_no         varchar(20)      not null,
+   Street _name    varchar(20)      not null,
+   City_name       varchar(50)      not null,
+   Pin_code        varchar(6)       not null
+);
+
+
+Insert     into   Address_details    values(
+   "213/c","manipakkam","chennai","676575"
+);
+
+Create table if not exists   college_details(
+   College_name       varchar(50)       not null,
+   College_address    varchar(20)       not null,
+   College_pincode    int               not null,
+   College_code       varchar(10),
+   Rank               varchar(15),
+   Total_seats        int               not null,
+   Accomodation       varchar(4)        not null,
+   Fees               int               not null,
+   Constraint       college_details_college_code_pk     primary key(college_code),
+  Constraint        college_details_ unq        unique(college_code),
+   Constraint       college_details_ unq        unique(rank),
+);
+
+
+create table if not exists course_deatils(
+  course_name    varchar(50)   not null,
+  course_code    varchar(20) ,
+  Constraint     course_details_course_code_pk     primary key(course_code),
+  Constraint     course_details_ unq               unique(course_code),
+ );
+
+
+create  table if not exists  seat_availability(
+  college_code        varchar(20),
+  course_code         varchar(20),
+  OC_seats            int               not null,
+  BC_seats            int               not null,
+  MBC_seats           int               not null,
+  BCM_seats           int               not null,
+  SC/ST_seats         int               not null,
+  Constraint        seat_availability_college_code_fk    foreign key(college_code)     references seat_availability(college_code),
+  Constraint        seat_availability_course_code_fk     foreign key(course_code)      references seat_availability(course_code)
+ );
